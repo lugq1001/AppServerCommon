@@ -50,18 +50,7 @@ public class SBMessage {
 	}
 	
 	/*===================== Method =====================*/
-	
-	public void send(BaseResponse response) {
-		try {
-			ObjectMapper objectMapper = new ObjectMapper();  
-			String json = objectMapper.writeValueAsString(response);
-			send(json);
-		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e.getLocalizedMessage());
-		}
-	}
-	
+
 	public void send(String result) {
 		try {
 			switch (type) {
