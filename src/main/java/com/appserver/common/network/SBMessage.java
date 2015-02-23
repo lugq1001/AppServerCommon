@@ -1,14 +1,10 @@
 package com.appserver.common.network;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
@@ -38,7 +34,7 @@ public class SBMessage {
 	/**
 	 * 上传文件
 	 */
-	private List<SBMessageFile> files = new ArrayList<SBMessageFile>();
+	private ArrayList<SBMessageFile> files = new ArrayList<SBMessageFile>();
 	
 	private SBMessageType type = SBMessageType.Http;
 	
@@ -61,48 +57,12 @@ public class SBMessage {
 				break;
 			}
 			logger.debug("resp json:" + result);
-			//logger.debug("resp base64:" + b64Json);
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e.getLocalizedMessage());
 		}
 	}
 	
-/*	public String transmitToLogic(int reqid, BaseRequest req) {
-		String result = "";
-		try {
-			ObjectMapper objectMapper = new ObjectMapper();  
-			String json = objectMapper.writeValueAsString(req);
-			String host = AppConfig.getInstance().getServerConfig().getLogicServer().getHost();
-			int port = AppConfig.getInstance().getServerConfig().getLogicServer().getPort();
-			switch (type) {
-			case Http:
-				String path = AppConfig.getInstance().getServerConfig().getLogicServer().getHttpPath();
-				URIBuilder builder = new URIBuilder();
-				builder.setParameter("reqid", reqid + "");
-				builder.setParameter("data", json);
-				builder.setScheme("http");
-				builder.setHost(host);
-				builder.setPort(port);
-				builder.setPath(path + "/logic");
-				URI uri = builder.build();
-				HttpPost post = new HttpPost(uri);
-				CloseableHttpClient httpClient = HttpClients.createDefault();
-				CloseableHttpResponse resp = httpClient.execute(post);
-				result = EntityUtils.toString(resp.getEntity());  
-				resp.close();
-				break;
-			case WebSocket:
-				break;
-			}
-			logger.debug("result from logic:" + result);
-		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e.getLocalizedMessage());
-		}
-		return result;
-	}*/
-
 	/*===================== GetterSetter =====================*/
 	
 	public int getReq_id() {
@@ -121,11 +81,11 @@ public class SBMessage {
 		this.req_data = req_data;
 	}
 
-	public List<SBMessageFile> getFiles() {
+	public ArrayList<SBMessageFile> getFiles() {
 		return files;
 	}
 
-	public void setFiles(List<SBMessageFile> files) {
+	public void setFiles(ArrayList<SBMessageFile> files) {
 		this.files = files;
 	}
 
@@ -135,6 +95,10 @@ public class SBMessage {
 
 	public void setReq_uid(String req_uid) {
 		this.req_uid = req_uid;
+	}
+
+	public SBMessageType getType() {
+		return type;
 	}
 
 }

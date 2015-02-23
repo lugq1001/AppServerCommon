@@ -1,5 +1,7 @@
 package com.appserver.common.network;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * 上传文件
  */
@@ -13,6 +15,7 @@ public class SBMessageFile {
 
 	private long fileSize = 0L;
 	
+	@JsonIgnore
 	private byte[] bytes;
 
 	public String getFileType() {
